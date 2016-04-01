@@ -42,4 +42,5 @@ while True:
 	db.close()
 	
 	print "====done with " + str(exp)
+	time.sleep(20)
  

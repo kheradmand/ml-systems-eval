@@ -26,4 +26,4 @@ with open(respath + 'gstat.txt', 'r') as f:
 			#print match.group('mem')
                         mem = int(match.group('mem'))
                         memmax = max(memmax, mem)	
-	print "gpu:\t%d\nmem:\t%d" % (gpumax, memmax)
+	print "gpup:\t%d\nmemg:\t%d" % (gpumax, memmax)

@@ -14,8 +14,7 @@ fi
 	EXPNAME=`python exp_extractor.py $NAME`;
 	DATA=$(grep "epochSize" ../exp/$EXPNAME/Config/CRAP.cntk | cut  -d '=' -f 2 | tr -d ' ' | tr -d '\n')
 	BATCH=$(grep "minibatchSize" ../exp/$EXPNAME/Config/CRAP.cntk | head -n 1 |  cut  -d '=' -f 2 | tr -d ' ' | tr -d '\n')
-	HOST=$(cat ../exp/$EXPNAME/hosts | wc -l)
-	HOST=$((HOST-1))
+	HOST=$(grep Mustang ../exp/$EXPNAME/hosts | wc -l)
 	WORKER=$(cat ../exp/$EXPNAME/workers) 
 	GPU=$(cat ../exp/$EXPNAME/gpu)
 

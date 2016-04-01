@@ -53,6 +53,9 @@ cd $CRAP && ./copy_crap.sh;
 
 sleep 1;
 
+echo "capturing process state"
+$ANSIBLE -m shell -a "ps -ajxf" > $EVAL/ps.txt
+
 echo "starting monitors"
 cd $EVAL && ./run_dstat.sh;
 cd $EVAL && ./run_gstat.sh;
@@ -73,7 +76,8 @@ while true; do
 	date;
 	echo -n "check $i: ";
 	t=`tail -n 10 $EVAL/result.txt | grep COMPLETED | wc -l`
-	if [ $t == 0 ]; then 
+	y=`tail -n 3  $EVAL/result.txt | grep elapsed | wc -l`
+	if [ $t == 0 ] || [ $y == 0 ]; then 
 		echo "NOT DONE YET";	
 		tail -n 1 $EVAL/result.txt;
 	else
@@ -93,3 +97,4 @@ echo "moving results to proper place ($EXP-$n)"
 $ANSIBLE -m shell -a "mkdir $RES && mv eval/dstat.csv $RES && mv eval/gstat.txt $RES";
 mv $EVAL/result.txt $RES
 mv $EVAL/mapping.txt $RES
+mv $EVAL/ps.txt $RES
