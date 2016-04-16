@@ -65,7 +65,7 @@ sleep 1;
 rm -f $EVAL/result.txt;
 
 echo "running experiment";
-cd $CRAP && nohup ./run_crap.sh `cat $CONFIG/../gpu` `cat $CONFIG/../workers` $CONFIG/../hosts `cat "$CONFIG/../command"`  > $EVAL/mapping.txt  2> $EVAL/result.txt &
+cd $CRAP && nohup ./run_crap_perf.sh `cat $CONFIG/../gpu` `cat $CONFIG/../workers` $CONFIG/../hosts `cat "$CONFIG/../command"` > $EVAL/mapping.txt  2> $EVAL/result.txt &
 echo "experiment started";
 
 i=0;
@@ -75,15 +75,15 @@ while true; do
 	sleep $P;
 	date;
 	echo -n "check $i: ";
-	t=`tail -n 10 $EVAL/result.txt | grep COMPLETED | wc -l`
-	y=`tail -n 3  $EVAL/result.txt | grep elapsed | wc -l`
+	t=`tail -n 30 $EVAL/result.txt | grep COMPLETED | wc -l`
+	y=`tail -n 30  $EVAL/result.txt | grep "seconds time elapsed" | wc -l`
 	if [ $t == 0 ] || [ $y == 0 ]; then 
 		echo "NOT DONE YET";	
 		tail -n 1 $EVAL/result.txt;
 	else
 		echo "DONE";
 		grep SamplesSeen $EVAL/result.txt | tail -n 1;
-		tail -n 3 $EVAL/result.txt;
+		tail -n 20 $EVAL/result.txt;
 		break;
 	fi
 done	
