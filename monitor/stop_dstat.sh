@@ -1,4 +1,4 @@
-ANSIBLE="ansible cntk -i ~/tools/hosts"
+source ../common/common.sh
 
 
-$ANSIBLE -m shell -a "killall dstat"
+$ANSIBLE_SHELL "killall dstat"

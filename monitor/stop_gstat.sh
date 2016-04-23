@@ -1,9 +1,8 @@
-ANSIBLE="ansible cntk -i ~/tools/hosts"
+source ../common/common.sh
 
-
-$ANSIBLE -m shell -a "kill \`cat eval/gstat.pid\`"
-$ANSIBLE -m shell -a "rm eval/gstat.pid"
+$ANSIBLE -m shell -a "kill \`cat $MONITOR/gstat.pid\`"
+$ANSIBLE -m shell -a "rm $MONITOR/gstat.pid"
 #
-$ANSIBLE -m shell -a "cd eval && ./kill_gpustat.sh"
+$ANSIBLE -m shell -a "cd $MONITOR && ./kill_gpustat.sh"
 $ANSIBLE -m shell -a "killall nvidia-smi"
 

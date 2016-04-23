@@ -1,4 +1,3 @@
-ANSIBLE="ansible cntk -i ~/tools/hosts"
+source ../common/common.sh
 
-
-$ANSIBLE -m shell -a "cd eval && rm -f gstat.txt  && ./bcgstat.sh"
+$ANSIBLE_SHELL "cd $MONITOR && rm -f gstat.txt &&  ./bcgstat.sh"

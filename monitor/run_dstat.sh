@@ -1,4 +1,3 @@
-ANSIBLE="ansible cntk -i ~/tools/hosts"
+source ../common/common.sh;
 
-
-$ANSIBLE -m shell -a "rm -f eval/dstat.csv && nohup dstat -cmnrd --socket  --output eval/dstat.csv > /dev/null 2> /dev/null &"
+$ANSIBLE_SHELL  "rm -f $MONITOR/dstat.csv && nohup dstat -cmnrd --socket  --output $MONITOR/dstat.csv > /dev/null 2> /dev/null &"
