@@ -39,7 +39,7 @@ cd $EVAL && ./kill_all.sh;
 sleep 1;
 
 echo "===Preprocessing"
-cd $SYSTEM && ./setup.sh
+cd $SYSTEM && ./setup.sh $EXP $RES
 
 sleep 1;
 
@@ -55,7 +55,7 @@ sleep 1;
 
 
 echo "===Running experiment";
-cd $SYSTEM && nohup ./run.sh $EXP $RES &
+cd $SYSTEM && nohup time ./run.sh $EXP $RES > $EVAL/system_run_log.txt 2>&1 &
 PID=$!;
 echo "==Experiment started ($PID)";
 
@@ -68,9 +68,9 @@ while true; do
         i=$((i+1));
         total=$((total+P));
         date;
-        echo -n "===Check $i (time = $total): ";
+        echo -n "Check $i (time = $total): ";
         tail -n 1 $EVAL/result.txt;
-        if [ $total -gt `cat $EXP/limit`]; then
+        if [ $total -gt `cat $EXP/limit` ]; then
                 break;
         fi
 done
@@ -80,12 +80,17 @@ echo "===Stoping monitors"
 cd $MONITOR && ./stop_dstat.sh
 cd $MONITOR && ./stop_gstat.sh	
 
+sleep 2;
+
 echo "===Killing experiment"
 kill $PID
 sleep 2;
 cd $SYSTEM && ./kill.sh
 
+sleep 2;
+
 echo "===Moving results to proper place ($RES)"
-$ANSIBLE_SHELL "mkdir $RES && mv $MONTIOR/dstat.csv $RES && mv $MONITOR/gstat.txt $RES";
+$ANSIBLE_SHELL "mkdir $RES && mv $MONITOR/dstat.csv $RES && mv $MONITOR/gstat.txt $RES";
 mv $EVAL/ps.txt $RES
-cd $SYSTEM && ./post.sh
+mv $EVAL/system_run_log.txt $RES
+cd $SYSTEM && ./post.sh $EXP $RES

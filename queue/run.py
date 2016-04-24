@@ -5,15 +5,15 @@ import subprocess
 import os
 
 def run(exp):
-	subprocess.call("cd .. && ./stop_experiment.sh > /dev/null 2> /dev/null", shell=True)
-	subprocess.call("cd .. && ./run_experiment.sh " + exp + " > log.txt 2>&1 ", shell=True)	
+	subprocess.call("cd ../common && ./stop_experiment.sh > /dev/null 2> /dev/null", shell=True)
+	subprocess.call("cd ../common && ./run_experiment.sh " + exp + " > log.txt 2>&1 ", shell=True)	
 	n=0
 	while True:
-		if not os.path.exists("../res/" + exp + "-" + str(n)):
+		if not os.path.exists("../results/" + exp + "-" + str(n)):
 			break
 		n=n+1
 	n=n-1
-	subprocess.call("cd .. && mv log.txt res/" + exp + "-" + str(n) + "/", shell=True) 
+	subprocess.call("cd ../common && mv log.txt ../results/" + exp + "-" + str(n) + "/", shell=True) 
 	
 
 

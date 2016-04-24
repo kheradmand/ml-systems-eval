@@ -6,7 +6,7 @@ if len(sys.argv) != 2:
 	print 'usage: enq expname'
 	exit()
 exp=sys.argv[1]
-if not os.path.exists("/home/srg/eval/exp/" + exp):
+if not os.path.exists("../experiments/" + exp):
 	print 'experiment ' + exp + ' does not exit';
 	exit()
 
