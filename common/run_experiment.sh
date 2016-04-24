@@ -85,6 +85,8 @@ sleep 2;
 echo "===Killing experiment"
 kill $PID
 sleep 2;
+kill -9 $PID
+sleep 2;
 cd $SYSTEM && ./kill.sh
 
 sleep 2;

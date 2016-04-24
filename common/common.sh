@@ -1,6 +1,7 @@
 #Configure this stuff!
 ROOT="/home/srg/eval"
 ANSIBLE_HOSTS="/home/srg/tools/hosts"
+HOSTS="/home/srg/hostlist"
 RUNNABLE="/home/srg/exp"
 
 ANSIBLE="ansible all -i $ANSIBLE_HOSTS"
