@@ -1,6 +1,7 @@
 import subprocess
 data =  ("mnist", "cifar10")
-host = (7, 5, 3, 1)
+host = (8, 6, 4, 2)
+#host = (7, 5, 3, 1)
 batch = (1024, 256, 64, 16, 4)
 
 for d in data:

@@ -33,6 +33,7 @@ for i in range(0, hosts):
 	timeCost = map(float, timeCost)
 	timeCosts.append(timeCost)
 	acur = subprocess.check_output("cat "+res+"result.txt | grep 'Finished Epoch' | grep '\\[Err\\]' | cut -d '=' -f 2 " , shell=True).strip().split('\n')[::hosts]
+	print acur
 	acur = map(float, acur)
 	acur = map(lambda x: 1-x, acur) 
 	acurs.append(acur)

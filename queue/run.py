@@ -13,15 +13,16 @@ def run(exp):
 			break
 		n=n+1
 	n=n-1
+	failed = subprocess.check_output("cd ../common && cat log.txt | grep '===The system has failed!' | wc -l", shell=True)
 	subprocess.call("cd ../common && mv log.txt ../results/" + exp + "-" + str(n) + "/", shell=True) 
-	
+	return int(failed) > 0
 
 
 while True:
 	sys.stdout.flush()
 	db = sqlite3.connect('queue.db')
 	cursor = db.cursor()
-	cursor.execute("SELECT * FROM queue WHERE status=?", ("waiting",))
+	cursor.execute("SELECT * FROM queue WHERE status=? OR status=?", ("waiting","rerun"))
 	row=cursor.fetchone()
 	if row is None:
 		sys.stdout.write('.')
@@ -33,13 +34,24 @@ while True:
 	print ""
 	print "====executing " + str(exp)
 	
-	run(exp)
+	failed = run(exp)
 
 	db = sqlite3.connect('queue.db')
         cursor = db.cursor()
-        cursor.execute("UPDATE queue SET status = ? WHERE id = ?", ("done",id))
+        cursor.execute("UPDATE queue SET status = ? WHERE id = ?", ("failed" if failed else "done",id))
+	cursor = db.cursor()	
         db.commit()
 	db.close()
+
+	if failed:
+		print "==experiment failed, scheduling for rerun"
+		db = sqlite3.connect('queue.db')
+		cursor = db.cursor()
+		cursor.execute('''INSERT INTO queue(expname, status)
+                  VALUES(?,?)''', (exp, "rerun"))
+		db.commit()
+		db.close()
+		print "==scheduled"
 	
 	print "====done with " + str(exp)
 	time.sleep(20)

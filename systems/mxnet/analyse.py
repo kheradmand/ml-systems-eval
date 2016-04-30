@@ -41,8 +41,8 @@ for i in range(0, hosts):
 
 
 m = min(map(lambda x: len(x), timeCosts))
-m = min(m, map(lambda x: len(x), validAcurs))
-m = min(m, map(lambda x: len(x), trainAcurs))
+m = min(m, min(map(lambda x: len(x), validAcurs)))
+m = min(m, min(map(lambda x: len(x), trainAcurs)))
 
 
 for i in range(0, hosts):

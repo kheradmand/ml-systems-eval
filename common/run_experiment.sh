@@ -73,6 +73,11 @@ while true; do
         if [ $total -gt `cat $EXP/limit` ]; then
                 break;
         fi
+	failed=`cd $SYSTEM && ./failed.sh $EXP $RES`
+	if [ $failed -eq 1 ]; then
+		echo "===The system has failed!"
+		break;
+	fi
 done
 
 echo "=================="
