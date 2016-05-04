@@ -13,3 +13,5 @@ EXPS="$ROOT/experiments"
 RESS="$ROOT/results"
 SYSS="$ROOT/systems"
 MONITOR="$ROOT/monitor"
+ANALYZE="$ROOT/analyze"
+
