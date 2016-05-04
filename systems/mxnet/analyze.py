@@ -84,6 +84,6 @@ with open(res+'timeline-time.csv', 'w') as csvfile:
                 row= (time,) + tuple(map(lambda x: mean[x][i], range(1,3))) + tuple(map(lambda x: std[x][i], range(1,3))) + reduce(lambda x,y: x + y, map(lambda x: (validAcurs[x][i], trainAcurs[x][i]),range(0,hosts)))
                 writer.writerow(dict(zip(fieldnames,row)))	
 
-with open(res+'timeline-stat.csv', 'w') as stat:
+with open(res+'timeline-stat.txt', 'w') as stat:
 	stat.write("timecost-mean-mean:%f\n" % np.mean(mean[0]))
 
