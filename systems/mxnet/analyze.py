@@ -85,7 +85,7 @@ with open(res+'timeline-time.csv', 'w') as csvfile:
                 writer.writerow(dict(zip(fieldnames,row)))	
 
 with open(res+'timeline-stat.txt', 'w') as stat:
-	stat.write("timecost-mean-mean:%f\n" % np.mean(mean[0]))
-	stat.write("iterations-min:%d\n" % m)
+	stat.write("timecost_mean_mean:%f\n" % np.mean(mean[0]))
+	stat.write("iterations_min:%d\n" % m)
 
 

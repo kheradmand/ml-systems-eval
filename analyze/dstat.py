@@ -54,13 +54,13 @@ with open(res+'local-dstat-timeline.csv', 'w') as csvfile:
 with open(res+'local-dstat-stats.txt', 'w') as stat:
         for ind, i in enumerate(fieldnames[1:],start=1):
 		a=map(lambda x: x[ind], cutrows)
-                stat.write("%s-entries:%d\n" % (i, len(a)))
-                stat.write("%s-mean:%f\n" % (i, np.mean(a)))
-                stat.write("%s-std:%f\n" % (i, np.std(a)))
-                stat.write("%s-var:%f\n" % (i, np.var(a)))
-                stat.write("%s-median:%f\n" % (i, np.median(a)))
-                stat.write("%s-min:%f\n" % (i, np.amin(a)))
-                stat.write("%s-max:%f\n" % (i, np.amax(a)))
-                stat.write("%s-ninetieth:%f\n" % (i, np.percentile(a, 90)))
+                stat.write("%s_entries:%d\n" % (i, len(a)))
+                stat.write("%s_mean:%f\n" % (i, np.mean(a)))
+                stat.write("%s_std:%f\n" % (i, np.std(a)))
+                stat.write("%s_var:%f\n" % (i, np.var(a)))
+                stat.write("%s_median:%f\n" % (i, np.median(a)))
+                stat.write("%s_min:%f\n" % (i, np.amin(a)))
+                stat.write("%s_max:%f\n" % (i, np.amax(a)))
+                stat.write("%s_ninetieth:%f\n" % (i, np.percentile(a, 90)))
 
 

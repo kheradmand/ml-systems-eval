@@ -14,7 +14,7 @@ from create_csv_common import *
 
 
 
-fieldnames = glob +  [(h+"-"+s) for h in hosts for s in loca]
+fieldnames = glob +  [("M"+h[len("Mustang"):]+"_"+s) for h in hosts for s in loca]
 
-print ",".join(map(lambda x: "'"+x+"'", fieldnames))
+print ",".join(map(lambda x: x, fieldnames))
 

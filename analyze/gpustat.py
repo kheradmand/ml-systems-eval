@@ -66,11 +66,11 @@ with open(res+'local-gpu-timeline.csv', 'w') as csvfile:
 
 with open(res+'local-gpu-stats.txt', 'w') as stat:
 	for i in ('gpu','gpumem'):
-		stat.write("%s-entries:%d\n" % (i, len(cutrows[i])))
-		stat.write("%s-mean:%f\n" % (i, np.mean(cutrows[i])))
-		stat.write("%s-std:%f\n" % (i, np.std(cutrows[i])))
-		stat.write("%s-var:%f\n" % (i, np.var(cutrows[i])))
-		stat.write("%s-median:%f\n" % (i, np.median(cutrows[i])))
-		stat.write("%s-min:%f\n" % (i, np.amin(cutrows[i])))
-		stat.write("%s-max:%f\n" % (i, np.amax(cutrows[i])))
-		stat.write("%s-ninetieth:%f\n" % (i, np.percentile(cutrows[i], 90)))
+		stat.write("%s_entries:%d\n" % (i, len(cutrows[i])))
+		stat.write("%s_mean:%f\n" % (i, np.mean(cutrows[i])))
+		stat.write("%s_std:%f\n" % (i, np.std(cutrows[i])))
+		stat.write("%s_var:%f\n" % (i, np.var(cutrows[i])))
+		stat.write("%s_median:%f\n" % (i, np.median(cutrows[i])))
+		stat.write("%s_min:%f\n" % (i, np.amin(cutrows[i])))
+		stat.write("%s_max:%f\n" % (i, np.amax(cutrows[i])))
+		stat.write("%s_ninetieth:%f\n" % (i, np.percentile(cutrows[i], 90)))
