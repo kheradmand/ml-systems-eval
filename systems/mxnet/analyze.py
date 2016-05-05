@@ -86,4 +86,6 @@ with open(res+'timeline-time.csv', 'w') as csvfile:
 
 with open(res+'timeline-stat.txt', 'w') as stat:
 	stat.write("timecost-mean-mean:%f\n" % np.mean(mean[0]))
+	stat.write("iterations-min:%d\n" % m)
+
 
