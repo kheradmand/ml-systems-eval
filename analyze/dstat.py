@@ -54,6 +54,7 @@ with open(res+'local-dstat-timeline.csv', 'w') as csvfile:
 with open(res+'local-dstat-stats.txt', 'w') as stat:
         for ind, i in enumerate(fieldnames[1:],start=1):
 		a=map(lambda x: x[ind], cutrows)
+		a=map(lambda x: x - rows[1][ind], a)
                 stat.write("%s_entries:%d\n" % (i, len(a)))
                 stat.write("%s_mean:%f\n" % (i, np.mean(a)))
                 stat.write("%s_std:%f\n" % (i, np.std(a)))

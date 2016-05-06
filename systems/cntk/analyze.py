@@ -62,7 +62,7 @@ with open(res+'timeline-itration.csv', 'w') as csvfile:
 	fieldnames = ['iteration']
 	for i in ('mean', 'std') + tuple(map(str, range(0,hosts))):
 		for j in ('timecost', 'topAcur', 'acur'):
-			fieldnames.append(i + "-" + j)
+			fieldnames.append(i + "_" + j)
 
     	writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
@@ -76,7 +76,7 @@ with open(res+'timeline-time.csv', 'w') as csvfile:
         fieldnames = ['time']
         for i in ('mean', 'std') + tuple(map(str, range(0,hosts))):
                 for j in ('topAcur', 'acur'):
-                        fieldnames.append(i + "-" + j)
+                        fieldnames.append(i + "_" + j)
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
@@ -86,3 +86,7 @@ with open(res+'timeline-time.csv', 'w') as csvfile:
 		time = time + mean[0][i]
                 row= (time,) + tuple(map(lambda x: mean[x][i], range(1,3))) + tuple(map(lambda x: std[x][i], range(1,3))) + reduce(lambda x,y: x + y, map(lambda x: (acurs[x][i], topAcurs[x][i]),range(0,hosts)))
                 writer.writerow(dict(zip(fieldnames,row)))	
+
+with open(res+'timeline-stat.txt', 'w') as stat:
+        stat.write("timecost_mean_mean:%f\n" % np.mean(mean[0]))
+        stat.write("iterations_min:%d\n" % m)

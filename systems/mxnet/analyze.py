@@ -59,7 +59,7 @@ with open(res+'timeline-itration.csv', 'w') as csvfile:
 	fieldnames = ['iteration']
 	for i in ('mean', 'std') + tuple(map(str, range(0,hosts))):
 		for j in ('timecost', 'trainAcur', 'validAcur'):
-			fieldnames.append(i + "-" + j)
+			fieldnames.append(i + "_" + j)
 
     	writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
@@ -73,7 +73,7 @@ with open(res+'timeline-time.csv', 'w') as csvfile:
         fieldnames = ['time']
         for i in ('mean', 'std') + tuple(map(str, range(0,hosts))):
                 for j in ('trainAcur', 'validAcur'):
-                        fieldnames.append(i + "-" + j)
+                        fieldnames.append(i + "_" + j)
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 

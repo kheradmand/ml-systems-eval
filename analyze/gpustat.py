@@ -43,7 +43,7 @@ with open(res + 'gstat.txt', 'r') as f:
 			rows["gpu"].append(int(match.group('gpu')))
 		match=re.search("No running processes found", line)
 		if not match is None:
-			rows["gpumem"].append(-1)
+			rows["gpumem"].append(0)
 			continue	
 		match=re.search("C\s+%s\s+(?P<mem>\d+)\D+\s+\|" % ("("+"|".join(SYSTEMNAMES)+")"), line)
                 if not match is None:
@@ -66,11 +66,12 @@ with open(res+'local-gpu-timeline.csv', 'w') as csvfile:
 
 with open(res+'local-gpu-stats.txt', 'w') as stat:
 	for i in ('gpu','gpumem'):
-		stat.write("%s_entries:%d\n" % (i, len(cutrows[i])))
-		stat.write("%s_mean:%f\n" % (i, np.mean(cutrows[i])))
-		stat.write("%s_std:%f\n" % (i, np.std(cutrows[i])))
-		stat.write("%s_var:%f\n" % (i, np.var(cutrows[i])))
-		stat.write("%s_median:%f\n" % (i, np.median(cutrows[i])))
-		stat.write("%s_min:%f\n" % (i, np.amin(cutrows[i])))
-		stat.write("%s_max:%f\n" % (i, np.amax(cutrows[i])))
-		stat.write("%s_ninetieth:%f\n" % (i, np.percentile(cutrows[i], 90)))
+		a = map(lambda x: x - rows[i][1], cutrows[i])
+		stat.write("%s_entries:%d\n" % (i, len(a)))
+		stat.write("%s_mean:%f\n" % (i, np.mean(a)))
+		stat.write("%s_std:%f\n" % (i, np.std(a)))
+		stat.write("%s_var:%f\n" % (i, np.var(a)))
+		stat.write("%s_median:%f\n" % (i, np.median(a)))
+		stat.write("%s_min:%f\n" % (i, np.amin(a)))
+		stat.write("%s_max:%f\n" % (i, np.amax(a)))
+		stat.write("%s_ninetieth:%f\n" % (i, np.percentile(a, 90)))
